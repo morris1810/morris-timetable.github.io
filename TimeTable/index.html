@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div id="content">
+        <div id="day">
+            <!-- 
+                <div class="items" onclick="addItem()">
+                    <h3 class="subject">MATH</h3><span class="tag">P</span>
+                    <p class="time"><span class="time-strat">14.00</span> <span class="time-end">16.00</span></p>
+                    <p class="vanue">ONLINE</p>
+                </div>
+             -->
+        </div>
+    </div>
+
+    <script>
+        const day = document.getElementById("day");
+        const todaysDayInt = new Date().getDay();
+        let todaysDay
+        switch (todaysDayInt) {
+            case 0:
+                todaysDay = "sun";
+                break;
+            case 1:
+                todaysDay = "mon";
+                break;
+            case 2:
+                todaysDay = "tue";
+                break;
+            case 3:
+                todaysDay = "wed";
+                break;
+            case 4:
+                todaysDay = "thu";
+                break;
+            case 5:
+                todaysDay = "fri";
+                break;
+            case 6:
+                todaysDay = "sat";
+                break;
+            default:
+                todaysDay = "no"
+                break;
+        }
+        const classes = {
+            mon: [
+                ["ENG", "L", "ONLINE", 10.00, 12.00], 
+                ["CO", "L", "ONLINE", 15.00, 17.00], 
+                ["MATH", "L", "UC-8-11", 16.00, 18.00]
+            ], 
+            tue: [
+                ["MATH", "L", "UC-6-6", 16.00, 18.00]
+            ],
+            wed:[
+                ["CO", "P", "ONLINE", 10.00, 12.00],
+                ["ENG", "L", "UC-3-3", 14.00, 16.00], 
+                ["MATH", "L", "UC-8-11", 16.00, 18.00]
+            ],
+            thu:[
+                ["PP", "P", "UW-2-2", 14.00, 16.00], 
+                ["PP", "L", "ONLINE", 16.00, 18.00]
+            ],
+            fri:[
+                ["MATH", "L", "UC-6-6", 14.30, 16.30]
+            ],
+            sat:[],
+            sun:[], 
+            no: [
+                ["NO CLASS TODAY"]
+            ]
+        }
+
+
+
+        
+        function addItem() {
+            let numOfItem = classes[todaysDay].length;
+            for (var i = 0; i < numOfItem; i++) {
+                const items = document.createElement("div")
+                const subject = document.createElement("h3");
+                const time = document.createElement("p");
+                const time_strat = document.createElement("span");
+                const time_end = document.createElement("span");
+                const vanue = document.createElement("p");
+
+                items.classList.add('items');
+                subject.classList.add('subject');
+                time.classList.add('time');
+                vanue.classList.add('vanue');
+                time_strat.classList.add('time-start')
+                time_end.classList.add('time-end')
+                if (classes[todaysDay][i][1] == "L") {
+                    items.classList.add('l');
+                } else if (classes[todaysDay][i][1] == "P") {
+                    items.classList.add('p');
+                }
+
+                items.appendChild(subject);
+                items.appendChild(time);
+                items.appendChild(vanue);
+
+                time.appendChild(time_strat)
+                time.appendChild(time_end)
+
+                // Add the item text
+                subject.innerHTML = classes[todaysDay][i][0];
+                vanue.innerHTML = classes[todaysDay][i][2];
+                time_strat.innerHTML = classes[todaysDay][i][3].toFixed(2)
+                time_end.innerHTML = classes[todaysDay][i][4].toFixed(2)
+                // Add listItem to the listElement
+                day.appendChild(items);
+            }
+        }
+        addItem();
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+* {
+    padding: 0;
+    margin: 0;
+
+    font-family: 'Montserrat', sans-serif;
+
+    --bg-1: #121212;
+    --bg-2: #242424;
+    --font-1: #ffffff;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+#content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100%;
+    background-color: var(--bg-1);
+    color: var(--font-1);
+}
+#day {
+    position: relative;
+    display: grid;
+
+    height: 100vh;
+    width: 100%;
+}
+.items {
+    position: relative;
+    width: 100%;
+
+    background-color: var(--bg-2);
+    box-shadow: inset 0 0 5px 0 var(--bg-1);
+}
+.items.l{
+    background-color: #532ddc;
+}
+.items.p {
+    background-color: #ff7c80;
+}
+.items .subject {
+    position: absolute;
+    display: flex;
+    align-items: center;
+
+    top: 50%;
+    left: 50%;
+
+    font-size: 1.5rem;
+    transform: translate(-50%, -50%);
+
+
+}
+.items .tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 100;
+    margin: 0.5rem;
+    opacity: 0.3;
+}
+.items .time {
+    width: 90%;
+
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    display: flex;
+    justify-content: space-between;
+}
+.items .vanue {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+
+
+
