@@ -13,83 +13,110 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+    <div class="setting">
+        <button id="btn"> = </button>
+    </div>
+    <div id="settingContent">
+        <form action="">
+            <input type="date" name="" id="dateInput" value="">
+        </form>
+    </div>
     <div id="content">
         <div id="day">
-            <!-- 
-                <div class="items" onclick="addItem()">
-                    <h3 class="subject">MATH</h3><span class="tag">P</span>
-                    <p class="time"><span class="time-strat">14.00</span> <span class="time-end">16.00</span></p>
-                    <p class="vanue">ONLINE</p>
-                </div>
-             -->
         </div>
     </div>
 
     <script>
+        //Initialize Variable
         const day = document.getElementById("day");
-        const todaysDayInt = new Date().getDay();
-        let todaysDay
-        switch (todaysDayInt) {
-            case 0:
-                todaysDay = "sun";
-                break;
-            case 1:
-                todaysDay = "mon";
-                break;
-            case 2:
-                todaysDay = "tue";
-                break;
-            case 3:
-                todaysDay = "wed";
-                break;
-            case 4:
-                todaysDay = "thu";
-                break;
-            case 5:
-                todaysDay = "fri";
-                break;
-            case 6:
-                todaysDay = "sat";
-                break;
-            default:
-                todaysDay = "no"
-                break;
-        }
+        const btn = document.getElementById("btn");
+        const settingContent = document.getElementById("settingContent");
+        const dateInput = document.getElementById("dateInput");
+        var selectDay = new Date().getDay();
+        var todaysDay, changedDate;
+
         const classes = {
-            mon: [
-                ["ENG", "L", "ONLINE", 10.00, 12.00], 
-                ["CO", "L", "ONLINE", 15.00, 17.00], 
-                ["MATH", "L", "UC-8-11", 16.00, 18.00]
-            ], 
-            tue: [
-                ["MATH", "L", "UC-6-6", 16.00, 18.00]
-            ],
-            wed:[
-                ["CO", "P", "ONLINE", 10.00, 12.00],
-                ["ENG", "L", "UC-3-3", 14.00, 16.00], 
-                ["MATH", "L", "UC-8-11", 16.00, 18.00]
-            ],
-            thu:[
-                ["PP", "P", "UW-2-2", 14.00, 16.00], 
-                ["PP", "L", "ONLINE", 16.00, 18.00]
-            ],
-            fri:[
-                ["MATH", "L", "UC-6-6", 14.30, 16.30]
-            ],
-            sat:[],
-            sun:[], 
-            no: [
-                ["NO CLASS TODAY"]
-            ]
+                mon: [
+                    ["ENG", "L", "ONLINE", 10.00, 12.00], 
+                    ["CO", "L", "ONLINE", 15.00, 17.00], 
+                    ["MATH", "L", "UC-8-11", 16.00, 18.00]
+                ], 
+                tue: [
+                    ["MATH", "L", "UC-6-6", 16.00, 18.00]
+                ],
+                wed:[
+                    ["CO", "P", "ONLINE", 10.00, 12.00],
+                    ["ENG", "L", "UC-3-3", 14.00, 16.00], 
+                    ["MATH", "L", "UC-8-11", 16.00, 18.00]
+                ],
+                thu:[
+                    ["PP", "P", "UW-2-2", 14.00, 16.00], 
+                    ["PP", "L", "ONLINE", 16.00, 18.00]
+                ],
+                fri:[
+                    ["MATH", "L", "UC-6-6", 14.30, 16.30]
+                ],
+                sat:[],
+                sun:[], 
+                no: [
+                    ["NO CLASS TODAY"]
+                ]
+            }
+            
+        btn.onclick = () => {
+            settingContent.classList.toggle("active");
+            if (btn.innerHTML == " = "){
+                btn.innerHTML = " ・ ";
+            } else {
+                btn.innerHTML = " = ";
+            }
         }
 
+        dateInput.valueAsDate = new Date();
+        dateInput.onchange = () => {
+        setDay();
+        addItem();
+        }
 
+        function setDay() {            
 
-        
+            changedDate = dateInput.value.split("-");
+            selectDay = new Date(Number(changedDate[0]), Number(changedDate[1]) - 1, Number(changedDate[2])).getDay();
+            switch (selectDay) {
+                case 0:
+                    todaysDay = "sun";
+                    break;
+                case 1:
+                    todaysDay = "mon";
+                    break;
+                case 2:
+                    todaysDay = "tue";
+                    break;
+                case 3:
+                    todaysDay = "wed";
+                    break;
+                case 4:
+                    todaysDay = "thu";
+                    break;
+                case 5:
+                    todaysDay = "fri";
+                    break;
+                case 6:
+                    todaysDay = "sat";
+                    break;
+                default:
+                    todaysDay = "no"
+                    break;
+            }
+        }
+
         function addItem() {
+            while (day.hasChildNodes()) {
+                day.removeChild(day.firstChild);
+            }
             let numOfItem = classes[todaysDay].length;
             for (var i = 0; i < numOfItem; i++) {
-                const items = document.createElement("div")
+                const items = document.createElement("div");
                 const subject = document.createElement("h3");
                 const time = document.createElement("p");
                 const time_strat = document.createElement("span");
@@ -124,6 +151,7 @@
                 day.appendChild(items);
             }
         }
+        setDay();
         addItem();
 
 

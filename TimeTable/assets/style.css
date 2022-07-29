@@ -11,7 +11,53 @@
 
 body {
     overflow-y: scroll;
+    position: relative;
 }
+
+.setting {
+    position: fixed;
+    z-index: 102;
+    top: 0;
+    left: 0%;
+    color: var(--font-1);
+}
+.setting #btn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 102;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+    color: var(--font-1);
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    border-radius: 50%;
+}
+
+
+#settingContent {
+    position: fixed;
+    z-index: 101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: 0.5s;
+    width: 100%;
+    height: 0%;
+}
+
+#settingContent.active {
+    height: 100%;
+}
+
 
 #content {
     position: relative;
